@@ -20,7 +20,7 @@ export default class Chat {
 
   addApiRouteForMessageStreamViaSSE() {
     this.app.get('/api/chat-sse', (req, res) => {
-      // add the connection to our open connections
+      // add the connection to this.openConnections
       this.openConnections.push({ req, res, timestampOfLastMessageSent: 0 });
       // if this connection closes, remove it from this.openConnections
       req.on('close', () => this.openConnections =
