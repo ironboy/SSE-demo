@@ -15,12 +15,6 @@ The file with the email account addresss and the app password we obtain from Gma
 * So the '6 open connections limit' will not affect you when you are in production, only during development.
   - The solution: Don't have too many tabs open with your app in the same browser.
 
-### Install
-* npm install
-
-### Run backend and frontend at the same time
-* npm start
-
 ### Obtain an app password
 1. Create a new Google account and gmail (our use your old one).
 2. Make sure a logged into the correct Google account!
@@ -43,3 +37,9 @@ In this application:
 
 #### Note:
 The advantage of an app password compared to your 'real' password is that you can revoke an app password at any time (and create new ones) without having to change the password you use to login to your mail account.
+
+### Install
+* npm install
+
+### Run backend and frontend at the same time
+* npm start
