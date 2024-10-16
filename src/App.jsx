@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useAutoKeys } from "react-easier";
+import ChatMessages from "./ChatMessages";
+import ChatInputForm from "./ChatInputForm";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+  // omit the need to set keys in lists
+  useAutoKeys();
 
-export default App
+  // our state/context
+  const s = useStates("main", {
+    chatMessages: [],
+    newMessage: { userName: '', text: '' },
+    eventSourceSSE: null
+  });
+
+  // start an SSE listener if not done
+  if (!s.eventSourceSSE) {
+    s.eventSourceSSE = new EventSource('/api/chat-sse');
+    // listen to sse events (in this app: chat messages)
+    s.eventSourceSSE.onmessage = ({ data }) => {
+      s.chatMessages.push(JSON.parse(data));
+      setTimeout(() => window.scrollTo(0, 1000000), 100);
+    };
+  }
+
+  return <>
+    <header className="container-fluid p-3 fixed-top">
+      <h3 className="m-0">Chat using SSE</h3>
+    </header>
+    <main className="container mt-5">
+      <ChatMessages />
+    </main>
+    <ChatInputForm />
+  </>
+};

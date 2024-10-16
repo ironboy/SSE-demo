@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# File with gmail account and gmail secret
+gmail-secret.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
