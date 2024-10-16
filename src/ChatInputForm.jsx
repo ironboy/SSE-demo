@@ -19,13 +19,13 @@ export default function ChatInputForm() {
         <textarea className="form-control" name="text" required
           placeholder="Message" {...s.newMessage.bind('text')}
         ></textarea>
-        <div class="input-group mt-3">
+        <div className="input-group mt-3">
           <input type="text" className="form-control" name="userName" required
             disabled={s.userNameInputDisabled}
             placeholder="Username" {...s.newMessage.bind('userName')} />
-          <button class="btn btn-outline-primary" type="submit" id="button-addon2">Send</button>
+          <button className="btn btn-info" type=" submit" id="button-addon2">Send</button>
         </div>
       </Col>
     </Row>
-  </form>;
+  </form >;
 }

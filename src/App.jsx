@@ -1,6 +1,6 @@
-import { useAutoKeys } from "react-easier";
 import ChatMessages from "./ChatMessages";
 import ChatInputForm from "./ChatInputForm";
+import EmailModal from "./EmailModal";
 
 export default function App() {
 
@@ -11,7 +11,9 @@ export default function App() {
   const s = useStates("main", {
     chatMessages: [],
     newMessage: { userName: '', text: '' },
-    eventSourceSSE: null
+    eventSourceSSE: null,
+    showEmailModal: false,
+    email: ''
   });
 
   // start an SSE listener if not done
@@ -26,11 +28,20 @@ export default function App() {
 
   return <>
     <header className="container-fluid p-3 fixed-top">
-      <h3 className="m-0">Chat using SSE</h3>
+      <h3 className="m-0">
+        Chat using SSE
+        <button
+          onClick={() => s.showEmailModal = true}
+          className="btn btn-info float-end"
+        >
+          Send mail
+        </button>
+      </h3>
     </header>
     <main className="container mt-5">
-      <ChatMessages />
+      {ChatMessages(s)}
     </main>
     <ChatInputForm />
+    <EmailModal />
   </>
 };

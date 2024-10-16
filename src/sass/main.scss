@@ -16,12 +16,12 @@ main {
 }
 
 header,
-form {
+form[name="chat"] {
   background-color: #0b6b24;
   color: white;
 }
 
-button {
+button:not(.btn-secondary) {
   background-color: var(--bs-primary-bg-subtle) !important;
   color: black !important;
 }

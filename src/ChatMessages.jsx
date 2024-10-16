@@ -1,7 +1,4 @@
-export default function ChatMessages() {
-
-  const s = useStates("main");
-
+export default function ChatMessages(s) {
   return <div className="chat-messages">
     {s.chatMessages.map(({ timestamp, userName, text }) => <>
       <Row>
