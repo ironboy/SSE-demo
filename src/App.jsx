@@ -19,14 +19,19 @@ export default function App() {
   useEffect(() => {
     // Avoid getting double event sources in React Strict mode
     globalThis.eventSourceSSE && globalThis.eventSourceSSE.close();
-    // New event soruce
+    // New event source
     globalThis.eventSourceSSE = new EventSource('/api/chat-sse');
-    // Listen to sse events (in this app: chat messages)
-    globalThis.eventSourceSSE.onmessage = ({ data }) => {
-      s.chatMessages.push(JSON.parse(data));
-      setTimeout(() => window.scrollTo(0, 1000000), 100);
-    };
+    // Listen to SSE events
+    globalThis.eventSourceSSE.onmessage = doOnSseEvent
   }, []);
+
+  // On SSE events (in this app = chat messages)
+  // - add the chat message to our message list 
+  // and scroll to bottom of screen
+  function doOnSseEvent({ data }) {
+    s.chatMessages.push(JSON.parse(data));
+    setTimeout(() => window.scrollTo(0, 1000000), 100);
+  }
 
   return <>
     <header className="container-fluid p-3 fixed-top">
