@@ -16,13 +16,13 @@ export default function ChatInputForm() {
   return <form name="chat" className="container-fluid p-3 fixed-bottom" onSubmit={sendMessage}>
     <Row>
       <Col>
-        <textarea className="form-control" name="text" required
-          placeholder="Message" {...s.newMessage.bind('text')}
-        ></textarea>
+        <input className="form-control" name="userName" required
+          disabled={s.userNameInputDisabled}
+          placeholder="Username" {...s.newMessage.bind('userName')} />
+
         <div className="input-group mt-3">
-          <input type="text" className="form-control" name="userName" required
-            disabled={s.userNameInputDisabled}
-            placeholder="Username" {...s.newMessage.bind('userName')} />
+          <input className="form-control" name="text" required
+            placeholder="Message" {...s.newMessage.bind('text')} />
           <button className="btn btn-info" type=" submit" id="button-addon2">Send</button>
         </div>
       </Col>

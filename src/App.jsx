@@ -4,27 +4,29 @@ import EmailModal from "./EmailModal";
 
 export default function App() {
 
-  // omit the need to set keys in lists
+  // Omit the need to set keys in lists
   useAutoKeys();
 
   // our state/context
   const s = useStates("main", {
     chatMessages: [],
     newMessage: { userName: '', text: '' },
-    eventSourceSSE: null,
     showEmailModal: false,
     email: ''
   });
 
-  // start an SSE listener if not done
-  if (!s.eventSourceSSE) {
-    s.eventSourceSSE = new EventSource('/api/chat-sse');
-    // listen to sse events (in this app: chat messages)
-    s.eventSourceSSE.onmessage = ({ data }) => {
+  // Start an SSE listener
+  useEffect(() => {
+    // Avoid getting double event sources in React Strict mode
+    globalThis.eventSourceSSE && globalThis.eventSourceSSE.close();
+    // New event soruce
+    globalThis.eventSourceSSE = new EventSource('/api/chat-sse');
+    // Listen to sse events (in this app: chat messages)
+    globalThis.eventSourceSSE.onmessage = ({ data }) => {
       s.chatMessages.push(JSON.parse(data));
       setTimeout(() => window.scrollTo(0, 1000000), 100);
     };
-  }
+  }, []);
 
   return <>
     <header className="container-fluid p-3 fixed-top">
