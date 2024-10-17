@@ -6,7 +6,8 @@ import React from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
 import * as Easier from 'react-easier';
 
-// Export React Bootstrap and React Easier components & hooks as globals
+// Export React, React Bootstrap and React Easier 
+// components & hooks as globals
 Object.assign(globalThis, React, ReactBootstrap, Easier);
 
 createRoot(document.querySelector('#root')).render(
