@@ -17,7 +17,7 @@ The file with the email account addresss and the app password we obtain from Gma
   - And: When using React in Strict Mode (development mode) make sure you don't open two SSE connections at once by mistake (since components mount twice in Strict Mode).
 
 ### Obtain an app password
-1. Create a new Google account and gmail (our use your old one).
+1. Create a new Google account and gmail (or use your old one).
 2. Make sure a logged into the correct Google account!
 3. Goto https://myaccount.google.com/apppasswords
 4. Write "mail" in the input field asking for the name of the app.
